@@ -1,10 +1,74 @@
 (function() {
 	var AudioContext = window.AudioContext || window.webkitAudioContext;
 	var audioCtx = new AudioContext();
+	var songWidgets = [];
 	var songs = [];
 	var playing = false;
 	var loading = false;
 	var curSong;
+	// $('body').on('playSong', '.song', function() {
+	// 	console.log('document playSong');
+	// })
+	var manager = {
+		curSongWidgetElem: null,
+		playing: false,
+		loading: false,
+		init: function () {
+			console.log('manager > init');
+			$(document).on('playSong', function( e, curSongWidgetElem ) {
+				console.log('playSong, curSongWidgetElem:',curSongWidgetElem );
+				this.playSong( curSongWidgetElem )
+			}.bind(this));
+		},
+		playSong: function( songWidgetElem ) {
+			$('.song').song('stop');
+			songWidgetElem.song('play');
+			// if ( this.curSongWidgetElem ) {
+			// 	if ( songWidgetElem === this.curSongWidgetElem ) {
+			// 		console.log('same song');
+			// 		this.curSongWidgetElem.song('stop');
+			// 		this.curSongWidgetElem.song('play');
+			// 		playing = true;
+			// 		return;
+			// 	} else {
+			// 		this.curSongWidgetElem.song('stop');
+			// 		playing = false;
+			// 	}
+			// }
+			// this.curSongWidgetElem = songWidgetElem;
+			// if ( !playing ) {
+			// 	songWidgetElem.song('play');
+			// 	playing = true;
+			// }
+
+		}
+	}
+
+	console.log('fnj:',fnj);
+	fnj.songs = [];
+	fnj.config = {
+		waveColor: '#666',
+		progressColor: '#00C7FF',
+		barWidth: 3,
+		audioCtx: audioCtx
+	};
+	_.each( fnj.playlists, function( playlist, pIdx) {
+		playlist.data.idx = pIdx;
+		_.each( playlist.songs, function( song, sIdx ) {
+			song.playlistData = playlist.data;
+			song.idx = sIdx;
+			song.id = 's'+sIdx+'_'+playlist.data.date;
+		});
+		console.log('playlist.songs:',playlist.songs);
+		fnj.songs = fnj.songs.concat( playlist.songs );
+	});
+	console.log('fnj.songs:',fnj.songs);
+	_.each( fnj.songs, function ( song ) {
+		$('<div class="song row"></div>').appendTo( $('main') ).song( song );
+	});
+
+	manager.init();
+	/*
 	for (var i=0;i<6;i++) {
 		songs.push({
 			url:'audio/'+i+'.mp3'
@@ -65,5 +129,8 @@
 		curSong = song;
 
 	}
+	function createSongWidget( songData, idx ) {
 
+	}
+	*/
 })();
