@@ -1,5 +1,3 @@
-$blue: #00C7FF;
-
 @mixin gradient($color-top, $color-bottom) {
     background: $color-bottom;
     background: -moz-linear-gradient(top,  $color-top 0%, $color-bottom 100%);
@@ -33,6 +31,13 @@ $blue: #00C7FF;
     -webkit-animation:$animation;
     -ms-animation:$animation;
     animation:$animation;
+}
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -ms-transition: $transition;
+  transition: $transition;
 }
 @mixin transition-property($transition-property) {
     -webkit-transition-property: $transition-property;

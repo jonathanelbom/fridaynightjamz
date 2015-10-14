@@ -6,6 +6,8 @@
 	var playing = false;
 	var loading = false;
 	var curSong;
+	var color = $('#color').css('color');
+	console.log('color:',color);
 	// $('body').on('playSong', '.song', function() {
 	// 	console.log('document playSong');
 	// })
@@ -17,12 +19,13 @@
 			console.log('manager > init');
 			$(document).on('playSong', function( e, curSongWidgetElem ) {
 				console.log('playSong, curSongWidgetElem:',curSongWidgetElem );
-				this.playSong( curSongWidgetElem )
+				this.playSong( curSongWidgetElem );
 			}.bind(this));
 		},
-		playSong: function( songWidgetElem ) {
-			$('.song').song('stop');
+		playSong: function( songWidgetElem, pause ) {
+			$( '.song:not(#'+songWidgetElem.attr('id')+')' ).song('stop');
 			songWidgetElem.song('play');
+			// }
 			// if ( this.curSongWidgetElem ) {
 			// 	if ( songWidgetElem === this.curSongWidgetElem ) {
 			// 		console.log('same song');
@@ -48,9 +51,14 @@
 	fnj.songs = [];
 	fnj.config = {
 		waveColor: '#666',
-		progressColor: '#00C7FF',
+		progressColor: color, //'#00C7FF',
 		barWidth: 3,
-		audioCtx: audioCtx
+		audioCtx: audioCtx,
+		height: 50,
+		minPxPerSec: 1,
+		scrollParent: false,
+		fillParent: true,
+		backend: 'MediaElement'
 	};
 	_.each( fnj.playlists, function( playlist, pIdx) {
 		playlist.data.idx = pIdx;
