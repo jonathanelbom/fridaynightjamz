@@ -5,140 +5,113 @@
 	var songs = [];
 	var playing = false;
 	var loading = false;
+	var ready = false;
+	var curPlaylist;
 	var curSong;
+	var wavHeight = 100;
 	var color = $('#color').css('color');
-	console.log('color:',color);
-	// $('body').on('playSong', '.song', function() {
-	// 	console.log('document playSong');
-	// })
-	var manager = {
-		curSongWidgetElem: null,
-		playing: false,
-		loading: false,
-		init: function () {
-			console.log('manager > init');
-			$(document).on('playSong', function( e, curSongWidgetElem ) {
-				console.log('playSong, curSongWidgetElem:',curSongWidgetElem );
-				this.playSong( curSongWidgetElem );
-			}.bind(this));
-		},
-		playSong: function( songWidgetElem, pause ) {
-			$( '.song:not(#'+songWidgetElem.attr('id')+')' ).song('stop');
-			songWidgetElem.song('play');
-			// }
-			// if ( this.curSongWidgetElem ) {
-			// 	if ( songWidgetElem === this.curSongWidgetElem ) {
-			// 		console.log('same song');
-			// 		this.curSongWidgetElem.song('stop');
-			// 		this.curSongWidgetElem.song('play');
-			// 		playing = true;
-			// 		return;
-			// 	} else {
-			// 		this.curSongWidgetElem.song('stop');
-			// 		playing = false;
-			// 	}
-			// }
-			// this.curSongWidgetElem = songWidgetElem;
-			// if ( !playing ) {
-			// 	songWidgetElem.song('play');
-			// 	playing = true;
-			// }
+	var $main = $('main');
+	var $ws = $('#wavesurfer');
+	var $loadProgress = $('.loadProgress');
+	var ws = Object.create(WaveSurfer);
 
-		}
+	function setSong( song, playlist, playDelay ) {
+		ws.stop();
+		playDelay = playDelay || 500;
+		curSong = song;
+		curPlaylist = playlist;
+		$('.play-list-item').removeClass('selected');
+		$('.play-list-item#'+song.id).addClass('selected');
+		$('body, html').css('background-image', 'url("/img/'+song.image+'")');
+		$('.current-song').text( song.title );
+		$loadProgress.outerWidth( '0%' );
+		setTimeout( function() {
+			ws.load('/audio/'+curSong.mp3);
+		}, playDelay);
+
+	}
+	function playSongFromLink ( songId, playlistId ) {
+    	var playlist = _.findWhere( fnj.playlists, {id:playlistId} );
+    	var song = _.findWhere( playlist.songs, {id:songId} );
+    	var delay = 0;
+    	if ( $ws.outerHeight() < 5 ) {
+    		$main.css( 'padding-top', parseInt( $main.css('padding-top'), 10) + wavHeight );
+    		$ws.outerHeight( wavHeight);
+    		delay = 500;
+    	}
+    	setSong( song, playlist, delay );
+    }
+
+	function addPlaylist( data ) {
+		var listTemplate = '<section class="play-list row" id="'+data.id+'"><hgroup class="play-list-details">'
+			+'<h1 class="play-list-title">'+data.title+'</h1>'
+            +'<span class="play-list-artist">'+data.participants+'</span>'
+            +'</hgroup><ul class="play-list-items"></ul></section>';
+		var itemTemplate = '<li class="play-list-item">'
+        	+'<span class="item-thumb"></span>'
+        	+'<span class="item-count">1</span>'
+        	+'<span class="item-name">Naa Naa Wah Wah<span></li>';
+        var $list = $( listTemplate );
+        var $items = $list.find('.play-list-items');
+        _.each( data.songs, function( song, idx ) {
+        	song.id = makeId();
+        	var itemTemplate = '<li class="play-list-item" id="'+song.id+'">'
+	        	+'<span class="item-thumb"></span>'
+	        	+'<span class="item-count">'+(idx+1)+'</span>'
+	        	+'<span class="item-name">'+song.title+'<span></li>';
+	        var $item = $( itemTemplate ).appendTo( $items );
+	        $item.find( '.item-thumb' ).css( 'background-image', 'url("'+'/img/'+song.image+'")' );
+        });
+		$list.appendTo( $main );
 	}
 
-	console.log('fnj:',fnj);
-	fnj.songs = [];
-	fnj.config = {
+    function makeId ( isPlaylist ) {
+        var uniqueness = '';
+        var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		for (var i = 0; i < 6; i++) {
+            if (i === 0) {
+                uniqueness += isPlaylist ? 'p_' : 's_';
+            } else {
+                uniqueness += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+        }
+        return uniqueness;
+    }
+
+	ws.init({
+		container: '#wavesurfer',
 		waveColor: '#666',
-		progressColor: color, //'#00C7FF',
+		progressColor: color,
+		cursorColor: color,
 		barWidth: 3,
 		audioCtx: audioCtx,
-		height: 50,
+		height: wavHeight,
 		minPxPerSec: 1,
 		scrollParent: false,
 		fillParent: true,
 		backend: 'MediaElement'
-	};
-	_.each( fnj.playlists, function( playlist, pIdx) {
-		playlist.data.idx = pIdx;
-		_.each( playlist.songs, function( song, sIdx ) {
-			song.playlistData = playlist.data;
-			song.idx = sIdx;
-			song.id = 's'+sIdx+'_'+playlist.data.date;
-		});
-		console.log('playlist.songs:',playlist.songs);
-		fnj.songs = fnj.songs.concat( playlist.songs );
 	});
-	console.log('fnj.songs:',fnj.songs);
-	_.each( fnj.songs, function ( song ) {
-		$('<div class="song row"></div>').appendTo( $('main') ).song( song );
+	$ws.on('mouseup', function() {
+		ws.play();
 	});
-
-	manager.init();
-	/*
-	for (var i=0;i<6;i++) {
-		songs.push({
-			url:'audio/'+i+'.mp3'
-		});
-	}
-	var $container = $('main');
-	var config = {
-		waveColor: '#666',
-		progressColor: '#00C7FF'
-	};
-	_.each( songs, function( song, idx ) {
-		var id = 's'+idx;
-		var $song = $('<div id="s'+idx+'" class="song row"></div>');
-		var $button = $('<button class="playpause"><i class="fa fa-play"></i></button>').appendTo( $song );
-		var $creds = $('<div class="creds"></div>').appendTo( $song );
-		var $name = $('<span class="name">song title here</span>').appendTo( $creds );
-		var $artist = $('<span class="artist">jonnybomb</span>').appendTo( $creds );
-		var $wav = $('<div class="wav"></div>').appendTo( $song );
-		$song.appendTo( $container );
-		var ws = Object.create(WaveSurfer);
-		ws.init({
-		    container: '#s'+idx+'> .wav',
-		    waveColor: config.waveColor,
-		    progressColor: config.progressColor,
-		    barWidth: 3,
-		    backend: 'MediaElement',
-		    audioContext: audioCtx,
-		    minPxPerSec: 1,
-		    scrollParent: false,
-		    fillParent: true
-		});
-		song.id = id;
-		song.elem = $song;
-		song.ws = ws;
-		ws.on('ready', function (e) {
-			//console.log('ready, e:',e,', this:',this);
-		});
-		$wav.on('mouseup', function (e) {
-			console.log('mouseup, e:',e,', this:',this);
-			playSong( _.findWhere( songs, {id: $(this).closest('.song').attr('id')} ) );
-		});
-		ws.load('audio/'+idx+'.mp3');
-	});
-	function playSong( song ) {
-		console.log('playSong, song:',song,', curSong:',curSong);
-		if ( curSong ) {
-			if ( song === curSong ) {
-				curSong.ws.play();
-				return;
-			} else {
-				curSong.ws.stop();
-				playing = false;
-			}
+	ws.on('loading', function( pct ){
+		$loadProgress.outerWidth( pct + '%' );
+		if ( pct >= 100 ) {
+			setTimeout( function() {
+				ws.play();
+			}, 500);
 		}
-		if ( !playing ) {
-			song.ws.play();
-		}
-		curSong = song;
+	});
+	ws.on('ready', function () {
+	});
 
-	}
-	function createSongWidget( songData, idx ) {
+    $main.on( 'click', '.play-list-item', function(e) {
+    	var $item = $(this);
+    	playSongFromLink( $item.attr('id'), $item.closest('.play-list').attr('id') );
+    });
 
-	}
-	*/
+	_.each( fnj.playlists, function( playlist ) {
+		playlist.id = makeId( true );
+		addPlaylist( playlist );
+	});
 })();
