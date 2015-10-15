@@ -21,13 +21,13 @@
     	<header class="navbar navbar-fixed-top main-nav" id="top" role="banner">
 			<hgroup class="container">
 				<div class="navbar-header">
-					<h1 class="logo">
+					<div class="current_song-controls">
+                        <button class="btn prev"><i class="fa fa-backward"></i></button><button class="btn playpause"><i class="fa fa-play"></i></button><button class="btn next"><i class="fa fa-forward"></i></button>
+                    </div>
+                    <h1 class="logo">
 						<span>friday</span><span>night</span><span>jamz</span>
 					</h1>
-                    <div class="play-controls">
-                        <span class="current-song"></span>
-
-                    </div>
+                    <span class="current_song-title-time"><span class="current_song-title"></span><span class="current_song-time"></span></span>
 				</div>
 			</hgroup>
             <hgroup class="sub-nav">
@@ -41,21 +41,7 @@
 		<!-- Content -->
     	<main class="container">
     	</main>
-    	<!--
-        <div class="modal">
-            <img class="full-size" src="">
-            <div class="descr"><span>sample description text</span></div>
-    		<div class="modal-controls">
-    			<i class="fa fa-arrow-circle-right js-next"></i>
-    			<i class="fa fa-arrow-circle-left js-prev"></i>
-                <hr/>
-    			<i class="fa fa-times-circle js-close"></i>
-    		</div>
-            <div class="loader">
-                <div class="spinner"></div>
-            </div>
-    	</div>
-        -->
+
     	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

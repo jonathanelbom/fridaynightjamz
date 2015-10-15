@@ -78,8 +78,6 @@
   line-height: 0.9em;
   flex-grow: 1;
   flex-shrink: 0;
-  -webkit-flex-grow: 1;
-  -webkit-flex-shrink: 0;
 }
 
 /* line 70, ../sass/main.scss */
@@ -89,8 +87,6 @@
   font-weight: 700;
   font-size: 0.875em;
   letter-spacing: -0.02em;
-  flex-shrink: 0;
-  -webkit-flex-shrink: 0;
 }
 
 /* line 79, ../sass/main.scss */
@@ -174,7 +170,7 @@ wave {
 
 /* line 133, ../sass/main.scss */
 main {
-  padding: 80px 20px 40px 20px;
+  padding: 100px 20px 40px 20px;
   text-align: center;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -188,53 +184,133 @@ main {
 /* line 140, ../sass/main.scss */
 .sub-nav {
   background-color: #121212;
-  border-top: 1px solid #FF0044;
+  position: relative;
 }
 /* line 143, ../sass/main.scss */
 .sub-nav.hidden {
   height: 0;
 }
 
-/* line 147, ../sass/main.scss */
+/* line 148, ../sass/main.scss */
 .loadProgress {
   width: 0%;
   padding: 0;
   margin: 0;
   height: 1px;
   background-color: #FF0044;
+  position: absolute;
+  top: -1px;
 }
 
-/* line 154, ../sass/main.scss */
+/* line 157, ../sass/main.scss */
 .navbar-header {
-  display: flex;
-  display: -webkit-flex;
-  flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-  align-items: baseline;
-  -webkit-align-items: baseline;
   width: 100%;
   padding: 8px 0 10px 0;
 }
 
-/* line 164, ../sass/main.scss */
+/* line 167, ../sass/main.scss */
 .navbar-fixed-top {
   background-color: #000;
   -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
-  min-height: 0px;
+  border-bottom: 1px solid #FF0044;
 }
 
 /* line 172, ../sass/main.scss */
-.current-song {
+.current_song {
   font-size: 1em;
   color: #999;
+  display: flex;
+  display: -webkit-flex;
 }
 
-/* line 176, ../sass/main.scss */
+/* line 178, ../sass/main.scss */
+.current_song-title-time {
+  display: inline-block;
+}
+
+/* line 181, ../sass/main.scss */
+.current_song-title {
+  display: inline-block;
+  color: #FF0044;
+  font-weight: 300;
+  margin-right: 10px;
+}
+
+/* line 187, ../sass/main.scss */
+.current_song-time {
+  display: inline-block;
+  color: #666;
+  font-weight: 500;
+  letter-spacing: -1px;
+  flex-shrink: 0;
+  -webkit-flex-shrink: 0;
+}
+
+/* line 195, ../sass/main.scss */
+.current_song-controls {
+  float: right;
+}
+
+/* line 198, ../sass/main.scss */
+.btn {
+  outline: none !important;
+  background-color: #FF0044;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 0;
+  -webkit-flex-grow: 0;
+  margin-right: 1px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  border-radius: 30px;
+}
+/* line 213, ../sass/main.scss */
+.btn:hover {
+  background-color: #000;
+  border-color: #FF0044;
+}
+/* line 214, ../sass/main.scss */
+.btn:hover i {
+  color: #FF0044;
+}
+/* line 218, ../sass/main.scss */
+.btn.playpause {
+  width: 40px;
+  height: 40px;
+}
+/* line 221, ../sass/main.scss */
+.btn.playpause i {
+  left: 2px;
+}
+/* line 225, ../sass/main.scss */
+.btn.prev i {
+  left: -3px;
+}
+/* line 228, ../sass/main.scss */
+.btn.next i {
+  left: 3px;
+}
+/* line 230, ../sass/main.scss */
+.btn i {
+  font-size: 20px;
+  color: #000;
+  position: relative;
+}
+/* line 234, ../sass/main.scss */
+.btn i.fa-pause {
+  left: 0px;
+}
+
+/* line 237, ../sass/main.scss */
 .logo {
-  flex-grow: 1;
-  -webkit-flex-grow: 1;
-  margin: 0 0 8px 0;
+  margin: 0 20px 8px 0;
   font-weight: 400;
   font-size: 30px;
   line-height: 30px;
@@ -242,59 +318,31 @@ main {
   display: inline-block;
   padding-bottom: 0px;
 }
-/* line 186, ../sass/main.scss */
+/* line 247, ../sass/main.scss */
 .logo span {
   vertical-align: middle;
 }
-/* line 187, ../sass/main.scss */
+/* line 248, ../sass/main.scss */
 .logo span:nth-child(1) {
   color: #ccc;
 }
-/* line 188, ../sass/main.scss */
+/* line 249, ../sass/main.scss */
 .logo span:nth-child(2) {
   color: #888;
 }
-/* line 189, ../sass/main.scss */
+/* line 250, ../sass/main.scss */
 .logo span:nth-child(3) {
   color: #FF0044;
 }
 
 @media (max-width: 767px) {
-  /* line 193, ../sass/main.scss */
+  /* line 253, ../sass/main.scss */
   .container > .navbar-header {
     margin-right: 0px;
     margin-left: 0px;
   }
 }
-/* line 199, ../sass/main.scss */
-.playpause {
-  flex-grow: 0;
-  -webkit-flex-grow: 0;
-  margin-right: 20px;
-  border-radius: 30px;
-  width: 46px;
-  height: 46px;
-  border: none;
-  background-color: #FF0044;
-  outline: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-/* line 212, ../sass/main.scss */
-.playpause i {
-  font-size: 25px;
-  color: #121212;
-  position: relative;
-  left: 3px;
-  top: 2px;
-}
-/* line 218, ../sass/main.scss */
-.playpause i.fa-pause {
-  left: 1px;
-}
-
-/* line 224, ../sass/main.scss */
+/* line 258, ../sass/main.scss */
 html, body {
   font-family: 'Open Sans', sans-serif;
   background-color: #111;
@@ -306,7 +354,7 @@ html, body {
   font-size: 16px;
 }
 
-/* line 235, ../sass/main.scss */
+/* line 269, ../sass/main.scss */
 body.modal-shown {
   overflow: hidden;
 }

@@ -13,37 +13,126 @@
 	var $main = $('main');
 	var $ws = $('#wavesurfer');
 	var $loadProgress = $('.loadProgress');
+	var $play = $('.playpause');
+	var $prev = $('.prev');
+	var $next = $('.next');
+	var $time = $('.current_song-time');
+	var interval;
 	var ws = Object.create(WaveSurfer);
 
 	function setSong( song, playlist, playDelay ) {
-		ws.stop();
-		playDelay = playDelay || 500;
-		curSong = song;
-		curPlaylist = playlist;
-		$('.play-list-item').removeClass('selected');
-		$('.play-list-item#'+song.id).addClass('selected');
-		$('body, html').css('background-image', 'url("/img/'+song.image+'")');
-		$('.current-song').text( song.title );
-		$loadProgress.outerWidth( '0%' );
-		setTimeout( function() {
-			ws.load('/audio/'+curSong.mp3);
-		}, playDelay);
-
-	}
-	function playSongFromLink ( songId, playlistId ) {
-    	var playlist = _.findWhere( fnj.playlists, {id:playlistId} );
-    	var song = _.findWhere( playlist.songs, {id:songId} );
-    	var delay = 0;
+		stop();
+		var delay = 0;
     	if ( $ws.outerHeight() < 5 ) {
     		$main.css( 'padding-top', parseInt( $main.css('padding-top'), 10) + wavHeight );
     		$ws.outerHeight( wavHeight);
     		delay = 500;
     	}
-    	setSong( song, playlist, delay );
+		playDelay = playDelay || 500;
+		curSong = song;
+		curPlaylist = playlist;
+		$('.play-list-item').removeClass('selected');
+		$('.play-list-item#'+song.id).addClass('selected');
+		$('body, html').css('background-image', 'url("img/'+song.image+'")');
+		$('.current_song-title').text( song.title );
+		$loadProgress.outerWidth( '0%' );
+		setTimeout( function() {
+			ws.load('audio/'+curSong.mp3);
+		}, playDelay);
+	}
+	function updateTime() {
+		var time = formatTime( ws.getCurrentTime() )+' / '+formatTime( ws.getDuration() );
+		$time.text( time );
+	}
+	function getSong( type ) {
+		var song;
+		var playlist;
+		var playlists = fnj.playlists;
+		if ( !curPlaylist ) {
+			curPlaylist = playlists[0];
+		}
+		var songs = curPlaylist.songs;
+		var playlistIdx = playlists.indexOf( curPlaylist );
+		var songIdx = songs.indexOf( curSong );
+		switch( type ) {
+			case 'first':
+				song = playlists[0].songs[0];
+				break;
+			case 'next':
+				if (songIdx < songs.length - 1) {
+					playlist = curPlaylist;
+					song = songs[ songIdx+1 ];
+				} else {
+					if ( playlistIdx < playlists.length -1 ) {
+						playlist = playlists[ playlistIdx+1 ];
+					} else {
+						playlist = playlists[0];
+					}
+					song = playlist.songs[0];
+				}
+				break;
+			case 'prev':
+				if (songIdx > 0) {
+					playlist = curPlaylist;
+					song = songs[ songIdx-1 ];
+				} else {
+					if ( playlistIdx > 0 ) {
+						playlist = playlists[ playlistIdx-1 ];
+					} else {
+						playlist = playlists[playlists.length-1];
+					}
+					song = playlist.songs[playlist.songs.length-1];
+				}
+				break;
+		}
+		return { song:song, playlist:playlist };
+	}
+	function play() {
+		if ( !curSong ) {
+			var song = getSong('first');
+			setSong( song.song, song.playlist );
+		}
+		if ( interval ) {
+			clearlInterval( interavlId );
+		}
+		interavlId = setInterval( updateTime.bind(this), 1000)
+		updateTime();
+		playing = true;
+		ws.play();
+		$play.find('i').removeClass('fa-play').addClass('fa-pause');
+	}
+	function pause() {
+		if ( interval ) {
+			clearlInterval( interavlId );
+		}
+		playing = false;
+		ws.pause();
+		$play.find('i').removeClass('fa-pause').addClass('fa-play');
+	}
+	function stop() {
+		if ( interval ) {
+			clearlInterval( interavlId );
+		}
+		playing = false;
+		if ( ws.isPlaying() ) {
+			ws.stop();
+		}
+		ws.empty();
+		$play.find('i').removeClass('fa-pause').addClass('fa-play');
+	}
+	function nextPrev( next ) {
+		var song = getSong( !curSong ? 'first' : next ? 'next' : 'prev' );
+		setSong( song.song, song.playlist );
+	}
+
+	function playSongFromLink ( songId, playlistId ) {
+    	var playlist = _.findWhere( fnj.playlists, {id:playlistId} );
+    	var song = _.findWhere( playlist.songs, {id:songId} );
+    	setSong( song, playlist );
     }
 
 	function addPlaylist( data ) {
-		var listTemplate = '<section class="play-list row" id="'+data.id+'"><hgroup class="play-list-details">'
+		var listTemplate = '<section class="play-list col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1" id="'+data.id+'"><hgroup class="play-list-details">'
 			+'<h1 class="play-list-title">'+data.title+'</h1>'
             +'<span class="play-list-artist">'+data.participants+'</span>'
             +'</hgroup><ul class="play-list-items"></ul></section>';
@@ -60,7 +149,7 @@
 	        	+'<span class="item-count">'+(idx+1)+'</span>'
 	        	+'<span class="item-name">'+song.title+'<span></li>';
 	        var $item = $( itemTemplate ).appendTo( $items );
-	        $item.find( '.item-thumb' ).css( 'background-image', 'url("'+'/img/'+song.image+'")' );
+	        $item.find( '.item-thumb' ).css( 'background-image', 'url("'+'img/'+song.image+'")' );
         });
 		$list.appendTo( $main );
 	}
@@ -78,12 +167,24 @@
         return uniqueness;
     }
 
+    function formatTime( time ) {
+		time = parseInt( time );
+		if ( isNaN(time) ) {
+			time = 0;
+		}
+		var minutes = Math.floor(time / 60);
+		var seconds = 	time - (minutes * 60);
+		function str_pad_left(string,pad,length) {
+		   return (new Array(length+1).join(pad)+string).slice(-length);
+		}
+		return str_pad_left(minutes,'0',2)+':'+str_pad_left(seconds,'0',2);
+	}
 	ws.init({
 		container: '#wavesurfer',
 		waveColor: '#666',
 		progressColor: color,
 		cursorColor: color,
-		barWidth: 3,
+		barWidth: 1,
 		audioCtx: audioCtx,
 		height: wavHeight,
 		minPxPerSec: 1,
@@ -92,19 +193,27 @@
 		backend: 'MediaElement'
 	});
 	$ws.on('mouseup', function() {
-		ws.play();
+		play();
 	});
 	ws.on('loading', function( pct ){
 		$loadProgress.outerWidth( pct + '%' );
 		if ( pct >= 100 ) {
-			setTimeout( function() {
-				ws.play();
-			}, 500);
+			play();
 		}
 	});
-	ws.on('ready', function () {
+	ws.on('finish', function () {
+		nextPrev( true );
 	});
-
+	$('.current_song-controls').on('click', '.btn', function(e) {
+		var $btn = $(e.currentTarget);
+		if ( $btn.hasClass('playpause') ){
+			playing ? pause() : play();
+		} else if ( $btn.hasClass('next') ){
+			nextPrev( true );
+		} else if ( $btn.hasClass('prev') ){
+			nextPrev( false );
+		}
+	});
     $main.on( 'click', '.play-list-item', function(e) {
     	var $item = $(this);
     	playSongFromLink( $item.attr('id'), $item.closest('.play-list').attr('id') );
