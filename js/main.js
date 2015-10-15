@@ -35,8 +35,10 @@
 		$('.play-list-item#'+song.id).addClass('selected');
 		$('body, html').css('background-image', 'url("img/'+song.image+'")');
 		$('.current_song-title').text( song.title );
+		$('.current_song-title-time').removeClass('hidden');
 		$loadProgress.outerWidth( '0%' );
 		setTimeout( function() {
+			$ws.off('mouseup');
 			ws.load('audio/'+curSong.mp3);
 		}, playDelay);
 	}
@@ -192,14 +194,19 @@
 		fillParent: true,
 		backend: 'MediaElement'
 	});
-	$ws.on('mouseup', function() {
-		play();
-	});
 	ws.on('loading', function( pct ){
 		$loadProgress.outerWidth( pct + '%' );
 		if ( pct >= 100 ) {
-			play();
+			$ws.off('mouseup').on('mouseup', function() {
+				play();
+			});
+			// if ( !ws.isPlaying() ) {
+			// 	ws.play();
+			// }
 		}
+	});
+	ws.on('ready', function () {
+		play();
 	});
 	ws.on('finish', function () {
 		nextPrev( true );
