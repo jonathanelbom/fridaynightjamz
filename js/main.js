@@ -17,7 +17,7 @@
 	var $prev = $('.prev');
 	var $next = $('.next');
 	var $time = $('.current_song-time');
-	var interval;
+	var intervalId;
 	var ws = Object.create(WaveSurfer);
 
 	function setSong( song, playlist, playDelay ) {
@@ -39,7 +39,10 @@
 		$loadProgress.outerWidth( '0%' );
 		setTimeout( function() {
 			$ws.off('mouseup');
-			ws.load('audio/'+curSong.mp3);
+			ws.load('audio/'+curSong.mp3, curSong.peaks);
+			// if ( curSong.peaks ) {
+
+			// }
 		}, playDelay);
 	}
 	function updateTime() {
@@ -94,27 +97,28 @@
 			var song = getSong('first');
 			setSong( song.song, song.playlist );
 		}
-		if ( interval ) {
-			clearlInterval( interavlId );
+		if ( intervalId ) {
+			clearInterval( intervalId );
 		}
-		interavlId = setInterval( updateTime.bind(this), 1000)
+		intervalId = setInterval( updateTime.bind(this), 1000);
 		updateTime();
 		playing = true;
 		ws.play();
 		$play.find('i').removeClass('fa-play').addClass('fa-pause');
 	}
 	function pause() {
-		if ( interval ) {
-			clearlInterval( interavlId );
+		if ( intervalId ) {
+			clearInterval( intervalId );
 		}
 		playing = false;
 		ws.pause();
 		$play.find('i').removeClass('fa-pause').addClass('fa-play');
 	}
 	function stop() {
-		if ( interval ) {
-			clearlInterval( interavlId );
+		if ( intervalId ) {
+			clearInterval( intervalId );
 		}
+		$time.text( '' );
 		playing = false;
 		if ( ws.isPlaying() ) {
 			ws.stop();
@@ -168,7 +172,13 @@
         }
         return uniqueness;
     }
-
+    function addClickPlayHandler() {
+		//console.log( curSong.title,'> addClickPlayHandler');
+    	return;
+    	$ws.off('mouseup').on('mouseup', function() {
+			play();
+		});
+    }
     function formatTime( time ) {
 		time = parseInt( time );
 		if ( isNaN(time) ) {
@@ -196,16 +206,17 @@
 	});
 	ws.on('loading', function( pct ){
 		$loadProgress.outerWidth( pct + '%' );
+		//console.log(curSong.title,'> loading, pct:',pct);
 		if ( pct >= 100 ) {
-			$ws.off('mouseup').on('mouseup', function() {
-				play();
-			});
-			// if ( !ws.isPlaying() ) {
-			// 	ws.play();
-			// }
+			addClickPlayHandler();
 		}
 	});
 	ws.on('ready', function () {
+		//console.log(curSong.title,'> ready');
+		if ( curSong.peaks ) {
+			$loadProgress.outerWidth( '100%' );
+			addClickPlayHandler();
+		}
 		play();
 	});
 	ws.on('finish', function () {

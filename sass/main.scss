@@ -173,9 +173,10 @@ main {
 		display:none;
 	}
 }
+$marginTop: 2px;
 .current_song-title {
 	display:inline-block;
-	margin-top: 2px;
+	margin-top: $marginTop;
 	color: $color;
 	font-weight: 300;
 	margin-right: 10px;
@@ -185,6 +186,7 @@ main {
 	color: #666;
 	font-weight: 500;
 	letter-spacing: -1px;
+	margin-top: $marginTop;
 	flex-shrink: 0;
 	-webkit-flex-shrink: 0;
 }
