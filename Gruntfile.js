@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 		compass: {
 			dist: {
 				options: {
-					config:'config.rb',
+					config:'config/compass.rb',
 					cssDir: 'dist/css',
 					outputStyle: 'compressed' //expanded, nested, compact, or compressed
 				}
@@ -22,15 +22,47 @@ module.exports = function(grunt) {
 	        dest: 'dist/js/main.js'
 	      }
 	    },
+	    copy: {
+		  main: {
+		    files: [
+				{
+				    src: 'index.html',
+				    dest: 'dist/index.html'
+				},
+				{
+				    src: 'songs.js',
+				    dest: 'dist/songs.js'
+				},
+				{
+					expand: true,
+					src: ['audio/*'],
+					dest: 'dist',
+					filter: 'isFile'
+				},
+				{
+					expand: true,
+					src: ['libs/*'],
+					dest: 'dist',
+					filter: 'isFile'
+				},
+				{
+					expand: true,
+					src: ['img/*'],
+					dest: 'dist',
+					filter: 'isFile'
+				}
+			]
+		  },
+		},
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	grunt.registerTask('default', []);
 	grunt.registerTask('scss', ['watch']);
-	grunt.registerTask('dist', ['uglify', 'compass']);
+	grunt.registerTask('dist', ['uglify', 'compass', 'copy']);
 }
 

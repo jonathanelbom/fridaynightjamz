@@ -27,7 +27,7 @@
 	}
 	var $playMobile = $('.play-mobile');
 	$playMobile.hide();
-	console.log('isMobile:',isMobile);
+	//console.log('isMobile:',isMobile);
 
 	function setSong( song, playlist, playDelay ) {
 		stop();
@@ -116,7 +116,7 @@
 		updateTime();
 		if ( fromClick ) {
 			$playMobile.hide();
-			console.log('play, fromClick:',fromClick,', ws.isPlaying():',ws.isPlaying());
+			//console.log('play, fromClick:',fromClick,', ws.isPlaying():',ws.isPlaying());
 		}
 		playing = true;
 		ws.play();
@@ -225,13 +225,13 @@
 	});
 	ws.on('loading', function( pct ){
 		//$loadProgress.outerWidth( pct + '%' );
-		console.log(curSong.title,'> loading, pct:',pct);
+		//console.log(curSong.title,'> loading, pct:',pct);
 		if ( pct >= 100 ) {
 			addClickPlayHandler();
 		}
 	});
 	ws.on('ready', function () {
-		console.log(curSong.title,'> ready');
+		//console.log(curSong.title,'> ready');
 		if ( curSong.peaks ) {
 			addClickPlayHandler();
 		}
