@@ -11,6 +11,12 @@ $color: $red;
     margin-right: 0px;
     margin-left: 0px;
   }
+
+}
+@media (max-width: 500px) {
+  .play-list-items {
+  	padding-left: 0 !important;
+  }
 }
 
 @-moz-keyframes spin {
@@ -48,14 +54,7 @@ $bgColor: rgba(0,0,0,0.85);
 	}
 }
 .play-list-details {
-	display: flex;
-	display: -webkit-flex;
-	flex-wrap: wrap;
-	-webkit-flex-wrap: wrap;
-	align-items: baseline;
-	-webkit-align-items: baseline;
-	justify-content:flex-start;
-	-webkit-justify-content:flex-start;
+	@include flex( flex, flex-start, baseline, wrap );
 }
 $marginBottom: 5px;
 .play-list-title {
@@ -64,8 +63,7 @@ $marginBottom: 5px;
 	margin: 0 0 $marginBottom 0;
 	font-size: 1.3em;
 	line-height: 0.9em;
-	flex-grow: 1;
-	flex-shrink:0;
+	@include flex-size( 1, 0 );
 }
 .play-list-artist {
 	text-align: left;
@@ -80,10 +78,7 @@ $marginBottom: 5px;
 	padding-left: 30px;
 }
 .play-list-item {
-	display: flex;
-	display: -webkit-flex;
-	align-items: baseline;
-	-webkit-align-items: baseline;
+	@include flex( flex, flex-start, baseline, wrap );
 	font-size: 1em;
 	list-style-type: none;
 	padding: 7px;
@@ -123,9 +118,28 @@ $marginBottom: 5px;
 	height: 0px;
 	overflow-y: hidden;
 	@include transition( height 0.5s ease );
+	position:relative;
 }
 wave {
 	@include box-sizing(content-box);
+}
+.play-mobile {
+	position:absolute;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	@include flex( flex, center, center );
+	cursor: pointer;
+	.play-icon {
+		$side: 60px;
+		height: $side;
+		width: $side;
+		@include border-radius( 30px );
+		background-color: $color;
+		@include flex( flex, center, center );
+		color: #000;
+		font-size: 25px;
+	}
 }
 main {
 	padding: 100px 20px 40px 20px;
@@ -134,8 +148,11 @@ main {
 	overflow-x: hidden;
 	@include transition( padding-top 0.5s ease );
 }
+.control-nav {
+	background-color: #000;
+}
 .sub-nav {
-	background-color: #121212;
+	background-color: #222;//#121212;
 	&.hidden {
 		height: 0;
 	}
@@ -156,15 +173,14 @@ main {
 	position: relative;
 }
 .navbar-fixed-top {
-	background-color: #000;
+	//background-color: #000; //rgba(0,0,0,0.85);
 	@include box-shadow( 0 1px 5px 0 rgba(0,0,0,0.5) );
 	border-bottom: 1px solid $color;
 }
 .current_song {
 	font-size: 1em;
 	color: #999;
-	display: flex;
-	display: -webkit-flex;
+	@include flex( flex );
 }
 .current_song-title-time {
 	display: inline-block;
@@ -187,8 +203,7 @@ $marginTop: 2px;
 	font-weight: 500;
 	letter-spacing: -1px;
 	margin-top: $marginTop;
-	flex-shrink: 0;
-	-webkit-flex-shrink: 0;
+	@include flex-size( 0, 0 );
 }
 .current_song-controls {
 	float: right;
@@ -201,14 +216,8 @@ $marginTop: 2px;
 	$side: 30px;
 	background-color: #000;
 	outline: none;
-	display: inline-flex;
-	display: -webkit-inline-flex;
-	align-items: center;
-	-webkit-align-items: center;
-	-webkit-justify-content: center;
-	justify-content: center;
-	flex-grow: 0;
-	-webkit-flex-grow: 0;
+	@include flex( inline-flex, center, center );
+	@include flex-size( 0 );
 	width: $side;
 	height: $side;
 	border: none;

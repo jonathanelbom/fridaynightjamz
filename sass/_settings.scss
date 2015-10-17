@@ -8,6 +8,43 @@
     background: linear-gradient(to bottom,  $color-top 0%,$color-bottom 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color-top', endColorstr='$color-bottom',GradientType=0 );
 }
+@mixin flex ( $display:"flex", $justify-content:"", $align-items:"", $wrap:"" ) {
+  @if $display == "flex" {
+    display: flex;
+    display: -webkit-flex;
+  }
+  @else if $display == "inline-flex" {
+    display: inline-flex;
+    display: -webkit-inline-flex;
+  }
+  @if $justify-content != "" {
+    justify-content: $justify-content;
+    -webkit-justify-content: $justify-content;
+  }
+  @if $align-items != "" {
+    align-items: $align-items;
+    -webkit-align-items: $align-items;
+  }
+  @if $wrap != "" {
+    flex-wrap: $wrap;
+    -webkit-flex-wrap: $wrap;
+  }
+}
+@mixin flex-size ( $grow:0, $shrink:1, $basis:auto ) {
+  flex-grow: $grow;
+  -webkit-flex-grow: $grow;
+  flex-shrink: $shrink;
+  -webkit-flex-shrink: $shrink;
+  flex-basis: $basis;
+  -webkit-flex-basis: $basis;
+}
+@mixin flex-display( $display ) {
+  display: display;
+}
+@mixin align-items( $align ) {
+  align-items: $align;
+  -webkit-align-items: $align;
+}
 @mixin border-radius($radius) {
     -webkit-border-radius: $radius;
     -moz-border-radius: $radius;

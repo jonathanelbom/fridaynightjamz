@@ -327,7 +327,7 @@ var WaveSurfer = {
         this.backend.load(url, this.mediaContainer, peaks);
 
         this.tmpEvents.push(
-            this.backend.once('canplay', (function () {
+            this.backend.on('canplay', (function () {
                 this.drawBuffer();
                 this.fireEvent('ready');
             }).bind(this)),

@@ -5,6 +5,12 @@
     margin-left: 0px;
   }
 }
+@media (max-width: 500px) {
+  /* line 17, ../sass/main.scss */
+  .play-list-items {
+    padding-left: 0 !important;
+  }
+}
 @-moz-keyframes spin {
   0% {
     -moz-transform: rotate(0deg);
@@ -37,12 +43,12 @@
     transform: rotate(360deg);
   }
 }
-/* line 33, ../sass/main.scss */
+/* line 39, ../sass/main.scss */
 #color {
   color: #FF0044;
 }
 
-/* line 36, ../sass/main.scss */
+/* line 42, ../sass/main.scss */
 .play-list {
   color: #aaa;
   font-weight: 300;
@@ -53,29 +59,29 @@
   -ms-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 42, ../sass/main.scss */
+/* line 48, ../sass/main.scss */
 .play-list:not(:last-child) {
   margin-bottom: 40px;
 }
-/* line 45, ../sass/main.scss */
+/* line 51, ../sass/main.scss */
 .play-list.row {
   margin-left: 0;
   margin-right: 0;
 }
 
-/* line 50, ../sass/main.scss */
+/* line 56, ../sass/main.scss */
 .play-list-details {
   display: flex;
   display: -webkit-flex;
-  flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-  align-items: baseline;
-  -webkit-align-items: baseline;
   justify-content: flex-start;
   -webkit-justify-content: flex-start;
+  align-items: baseline;
+  -webkit-align-items: baseline;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
 }
 
-/* line 61, ../sass/main.scss */
+/* line 60, ../sass/main.scss */
 .play-list-title {
   font-weight: 100;
   text-align: left;
@@ -83,10 +89,14 @@
   font-size: 1.3em;
   line-height: 0.9em;
   flex-grow: 1;
+  -webkit-flex-grow: 1;
   flex-shrink: 0;
+  -webkit-flex-shrink: 0;
+  flex-basis: auto;
+  -webkit-flex-basis: auto;
 }
 
-/* line 70, ../sass/main.scss */
+/* line 68, ../sass/main.scss */
 .play-list-artist {
   text-align: left;
   color: #555;
@@ -96,54 +106,58 @@
   margin-bottom: 5px;
 }
 
-/* line 78, ../sass/main.scss */
+/* line 76, ../sass/main.scss */
 .play-list-items {
   margin: 0;
   padding-left: 30px;
 }
 
-/* line 82, ../sass/main.scss */
+/* line 80, ../sass/main.scss */
 .play-list-item {
   display: flex;
   display: -webkit-flex;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
   align-items: baseline;
   -webkit-align-items: baseline;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
   font-size: 1em;
   list-style-type: none;
   padding: 7px;
   text-align: left;
   cursor: pointer;
 }
-/* line 92, ../sass/main.scss */
+/* line 87, ../sass/main.scss */
 .play-list-item:not(:last-child) {
   border-bottom: 1px solid #333;
 }
-/* line 95, ../sass/main.scss */
+/* line 90, ../sass/main.scss */
 .play-list-item:hover:not(.selected) {
   color: #000;
   background-color: #FF0044;
 }
-/* line 98, ../sass/main.scss */
+/* line 93, ../sass/main.scss */
 .play-list-item:hover:not(.selected) .item-count {
   color: #000;
 }
-/* line 100, ../sass/main.scss */
+/* line 95, ../sass/main.scss */
 .play-list-item.selected {
   color: #FF0044;
 }
-/* line 102, ../sass/main.scss */
+/* line 97, ../sass/main.scss */
 .play-list-item.selected .item-count {
   color: #FF0044;
 }
 
-/* line 105, ../sass/main.scss */
+/* line 100, ../sass/main.scss */
 .item-count {
   font-weight: 500;
   color: #444;
   margin-right: 10px;
 }
 
-/* line 110, ../sass/main.scss */
+/* line 105, ../sass/main.scss */
 .item-thumb {
   margin-right: 10px;
   display: inline-block;
@@ -155,7 +169,7 @@
   top: 3px;
 }
 
-/* line 120, ../sass/main.scss */
+/* line 115, ../sass/main.scss */
 #wavesurfer {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -167,15 +181,49 @@
   -o-transition: height 0.5s ease;
   -ms-transition: height 0.5s ease;
   transition: height 0.5s ease;
+  position: relative;
 }
 
-/* line 127, ../sass/main.scss */
+/* line 123, ../sass/main.scss */
 wave {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 
-/* line 130, ../sass/main.scss */
+/* line 126, ../sass/main.scss */
+.play-mobile {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  cursor: pointer;
+}
+/* line 133, ../sass/main.scss */
+.play-mobile .play-icon {
+  height: 60px;
+  width: 60px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  border-radius: 30px;
+  background-color: #FF0044;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  color: #000;
+  font-size: 25px;
+}
+
+/* line 144, ../sass/main.scss */
 main {
   padding: 100px 20px 40px 20px;
   text-align: center;
@@ -188,17 +236,22 @@ main {
   transition: padding-top 0.5s ease;
 }
 
-/* line 137, ../sass/main.scss */
+/* line 151, ../sass/main.scss */
+.control-nav {
+  background-color: #000;
+}
+
+/* line 154, ../sass/main.scss */
 .sub-nav {
-  background-color: #121212;
+  background-color: #222;
   position: relative;
 }
-/* line 139, ../sass/main.scss */
+/* line 156, ../sass/main.scss */
 .sub-nav.hidden {
   height: 0;
 }
 
-/* line 144, ../sass/main.scss */
+/* line 161, ../sass/main.scss */
 .loadProgress {
   width: 0%;
   padding: 0;
@@ -209,22 +262,21 @@ main {
   top: -1px;
 }
 
-/* line 153, ../sass/main.scss */
+/* line 170, ../sass/main.scss */
 .navbar-header {
   width: 100%;
   padding: 8px 0 10px 0;
   position: relative;
 }
 
-/* line 158, ../sass/main.scss */
+/* line 175, ../sass/main.scss */
 .navbar-fixed-top {
-  background-color: #000;
   -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
   border-bottom: 1px solid #FF0044;
 }
 
-/* line 163, ../sass/main.scss */
+/* line 180, ../sass/main.scss */
 .current_song {
   font-size: 1em;
   color: #999;
@@ -232,17 +284,17 @@ main {
   display: -webkit-flex;
 }
 
-/* line 169, ../sass/main.scss */
+/* line 185, ../sass/main.scss */
 .current_song-title-time {
   display: inline-block;
   margin-right: 20px;
 }
-/* line 172, ../sass/main.scss */
+/* line 188, ../sass/main.scss */
 .current_song-title-time .hidden {
   display: none;
 }
 
-/* line 177, ../sass/main.scss */
+/* line 193, ../sass/main.scss */
 .current_song-title {
   display: inline-block;
   margin-top: 2px;
@@ -251,18 +303,22 @@ main {
   margin-right: 10px;
 }
 
-/* line 184, ../sass/main.scss */
+/* line 200, ../sass/main.scss */
 .current_song-time {
   display: inline-block;
   color: #666;
   font-weight: 500;
   letter-spacing: -1px;
   margin-top: 2px;
+  flex-grow: 0;
+  -webkit-flex-grow: 0;
   flex-shrink: 0;
   -webkit-flex-shrink: 0;
+  flex-basis: auto;
+  -webkit-flex-basis: auto;
 }
 
-/* line 193, ../sass/main.scss */
+/* line 208, ../sass/main.scss */
 .current_song-controls {
   float: right;
   position: relative;
@@ -270,34 +326,38 @@ main {
   right: 2px;
 }
 
-/* line 199, ../sass/main.scss */
+/* line 214, ../sass/main.scss */
 .btn {
   outline: none !important;
   background-color: #000;
   outline: none;
   display: inline-flex;
   display: -webkit-inline-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
   align-items: center;
   -webkit-align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
   flex-grow: 0;
   -webkit-flex-grow: 0;
+  flex-shrink: 1;
+  -webkit-flex-shrink: 1;
+  flex-basis: auto;
+  -webkit-flex-basis: auto;
   width: 30px;
   height: 30px;
   border: none;
 }
-/* line 215, ../sass/main.scss */
+/* line 224, ../sass/main.scss */
 .btn:not(:last-child) {
   margin-right: 3px;
 }
-/* line 218, ../sass/main.scss */
+/* line 227, ../sass/main.scss */
 .btn i {
   font-size: 22px;
   color: #FF0044;
 }
 
-/* line 223, ../sass/main.scss */
+/* line 232, ../sass/main.scss */
 .logo {
   margin: 0 20px 8px 0;
   font-weight: 400;
@@ -307,24 +367,24 @@ main {
   display: inline-block;
   padding-bottom: 0px;
 }
-/* line 231, ../sass/main.scss */
+/* line 240, ../sass/main.scss */
 .logo span {
   vertical-align: middle;
 }
-/* line 232, ../sass/main.scss */
+/* line 241, ../sass/main.scss */
 .logo span:nth-child(1) {
   color: #ccc;
 }
-/* line 233, ../sass/main.scss */
+/* line 242, ../sass/main.scss */
 .logo span:nth-child(2) {
   color: #888;
 }
-/* line 234, ../sass/main.scss */
+/* line 243, ../sass/main.scss */
 .logo span:nth-child(3) {
   color: #FF0044;
 }
 
-/* line 236, ../sass/main.scss */
+/* line 245, ../sass/main.scss */
 html, body {
   font-family: 'Open Sans', sans-serif;
   background-color: #111;

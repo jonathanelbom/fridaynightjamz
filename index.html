@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>jonnybombjamz</title>
+        <title>friday night jamz</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -19,20 +19,24 @@
     	<div id="color"></div>
         <!-- Header -->
     	<header class="navbar navbar-fixed-top main-nav" id="top" role="banner">
-			<hgroup class="container">
-				<div class="navbar-header">
-					<div class="current_song-controls">
-                        <div class="btn prev"><i class="fa fa-backward"></i></div><div class="btn playpause"><i class="fa fa-play"></i></div><div class="btn next"><i class="fa fa-forward"></i></div>
-                    </div>
-                    <h1 class="logo">
-						<span>friday</span><span>night</span><span>jamz</span>
-					</h1>
-                    <span class="current_song-title-time hidden"><span class="current_song-title"></span><span class="current_song-time"></span></span>
-				</div>
-			</hgroup>
+			<hgroup class="control-nav">
+                <hgroup class="container">
+    				<div class="navbar-header">
+    					<div class="current_song-controls">
+                            <div class="btn prev"><i class="fa fa-backward"></i></div><div class="btn playpause"><i class="fa fa-play"></i></div><div class="btn next"><i class="fa fa-forward"></i></div>
+                        </div>
+                        <h1 class="logo">
+    						<span>friday</span><span>night</span><span>jamz</span>
+    					</h1>
+                        <span class="current_song-title-time hidden"><span class="current_song-title"></span><span class="current_song-time"></span></span>
+    				</div>
+    			</hgroup>
+            </hgroup>
             <hgroup class="sub-nav">
                 <div class="container">
-                    <div id="wavesurfer"></div>
+                    <div id="wavesurfer">
+                        <div class="play-mobile"><i class="play-icon fa fa-play"></i></div>
+                    </div>
                 </div>
                 <div class="loadProgress"></div>
             </hgroup>
@@ -43,12 +47,11 @@
     	</main>
 
     	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
         <script src="libs/wavesurfer.min.js"></script>
         <script src="songs.js"></script>
-        <script src="js/jquery.widget.song.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>
