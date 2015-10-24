@@ -1432,9 +1432,9 @@ WaveSurfer.util.extend(WaveSurfer.Drawer.Canvas, {
                 peaks = channels[0];
             }
         }
-        // if ( peaks && peaks.length > 0 ) {
-        //     console.log('peaks:',peaks.toString());
-        // }
+        if ( peaks && peaks.length > 0 ) {
+            console.log('peaks:',peaks.toString());
+        }
         // A half-pixel offset makes lines crisp
         var $ = 0.5 / this.params.pixelRatio;
         var width = this.width;
