@@ -52,7 +52,6 @@
 .play-list {
   color: #aaa;
   font-weight: 300;
-  background-color: rgba(0, 0, 0, 0.85);
   padding: 20px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -69,23 +68,11 @@
   margin-right: 0;
 }
 
-/* line 56, ../sass/main.scss */
-.play-list-details {
-  display: flex;
-  display: -webkit-flex;
-  justify-content: flex-start;
-  -webkit-justify-content: flex-start;
-  align-items: baseline;
-  -webkit-align-items: baseline;
-  flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-}
-
-/* line 60, ../sass/main.scss */
+/* line 61, ../sass/main.scss */
 .play-list-title {
   font-weight: 100;
   text-align: left;
-  margin: 0 0 5px 0;
+  margin: 0 0 7px 0;
   font-size: 1.3em;
   line-height: 0.9em;
   flex-grow: 1;
@@ -94,25 +81,36 @@
   -webkit-flex-shrink: 0;
   flex-basis: auto;
   -webkit-flex-basis: auto;
+  background-color: rgba(0, 0, 0, 0.95);
+  float: left;
+  display: inline-block;
+  padding: 14px;
+  border-top: 1px solid #333;
+  margin-right: 20px;
 }
 
-/* line 68, ../sass/main.scss */
+/* line 75, ../sass/main.scss */
 .play-list-artist {
   text-align: left;
   color: #555;
   font-weight: 700;
   font-size: 0.875em;
   letter-spacing: -0.02em;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
+  background-color: rgba(0, 0, 0, 0.95);
+  float: left;
+  display: inline-block;
+  padding: 14px;
+  border-top: 1px solid #333;
 }
 
-/* line 76, ../sass/main.scss */
+/* line 88, ../sass/main.scss */
 .play-list-items {
   margin: 0;
   padding-left: 30px;
 }
 
-/* line 80, ../sass/main.scss */
+/* line 92, ../sass/main.scss */
 .play-list-item {
   display: flex;
   display: -webkit-flex;
@@ -125,39 +123,48 @@
   font-size: 1em;
   list-style-type: none;
   padding: 7px;
+  padding-right: 21px;
   text-align: left;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: inline;
+  float: left;
+  border-top: 1px solid #333;
 }
-/* line 87, ../sass/main.scss */
+/* line 105, ../sass/main.scss */
+.play-list-item::after {
+  clear: both;
+}
+/* line 109, ../sass/main.scss */
 .play-list-item:not(:last-child) {
-  border-bottom: 1px solid #333;
+  margin-bottom: 7px;
 }
-/* line 90, ../sass/main.scss */
+/* line 112, ../sass/main.scss */
 .play-list-item:hover:not(.selected) {
   color: #000;
   background-color: #FF0044;
 }
-/* line 93, ../sass/main.scss */
+/* line 115, ../sass/main.scss */
 .play-list-item:hover:not(.selected) .item-count {
   color: #000;
 }
-/* line 95, ../sass/main.scss */
+/* line 117, ../sass/main.scss */
 .play-list-item.selected {
   color: #FF0044;
 }
-/* line 97, ../sass/main.scss */
+/* line 119, ../sass/main.scss */
 .play-list-item.selected .item-count {
   color: #FF0044;
 }
 
-/* line 100, ../sass/main.scss */
+/* line 124, ../sass/main.scss */
 .item-count {
   font-weight: 500;
   color: #444;
   margin-right: 10px;
 }
 
-/* line 105, ../sass/main.scss */
+/* line 129, ../sass/main.scss */
 .item-thumb {
   margin-right: 10px;
   display: inline-block;
@@ -169,7 +176,7 @@
   top: 3px;
 }
 
-/* line 115, ../sass/main.scss */
+/* line 139, ../sass/main.scss */
 #wavesurfer {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -184,13 +191,13 @@
   position: relative;
 }
 
-/* line 123, ../sass/main.scss */
+/* line 147, ../sass/main.scss */
 wave {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 
-/* line 126, ../sass/main.scss */
+/* line 150, ../sass/main.scss */
 .play-mobile {
   position: absolute;
   z-index: 10;
@@ -204,7 +211,7 @@ wave {
   -webkit-align-items: center;
   cursor: pointer;
 }
-/* line 133, ../sass/main.scss */
+/* line 157, ../sass/main.scss */
 .play-mobile .play-icon {
   height: 60px;
   width: 60px;
@@ -223,7 +230,7 @@ wave {
   font-size: 25px;
 }
 
-/* line 144, ../sass/main.scss */
+/* line 168, ../sass/main.scss */
 main {
   padding: 100px 20px 40px 20px;
   text-align: center;
@@ -236,22 +243,22 @@ main {
   transition: padding-top 0.5s ease;
 }
 
-/* line 151, ../sass/main.scss */
+/* line 175, ../sass/main.scss */
 .control-nav {
   background-color: #000;
 }
 
-/* line 154, ../sass/main.scss */
+/* line 178, ../sass/main.scss */
 .sub-nav {
   background-color: #222;
   position: relative;
 }
-/* line 156, ../sass/main.scss */
+/* line 180, ../sass/main.scss */
 .sub-nav.hidden {
   height: 0;
 }
 
-/* line 161, ../sass/main.scss */
+/* line 185, ../sass/main.scss */
 .loadProgress {
   width: 0%;
   padding: 0;
@@ -262,21 +269,21 @@ main {
   top: -1px;
 }
 
-/* line 170, ../sass/main.scss */
+/* line 194, ../sass/main.scss */
 .navbar-header {
   width: 100%;
   padding: 8px 0 10px 0;
   position: relative;
 }
 
-/* line 175, ../sass/main.scss */
+/* line 199, ../sass/main.scss */
 .navbar-fixed-top {
   -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
   border-bottom: 1px solid #FF0044;
 }
 
-/* line 180, ../sass/main.scss */
+/* line 204, ../sass/main.scss */
 .current_song {
   font-size: 1em;
   color: #999;
@@ -284,17 +291,17 @@ main {
   display: -webkit-flex;
 }
 
-/* line 185, ../sass/main.scss */
+/* line 209, ../sass/main.scss */
 .current_song-title-time {
   display: inline-block;
   margin-right: 20px;
 }
-/* line 188, ../sass/main.scss */
+/* line 212, ../sass/main.scss */
 .current_song-title-time .hidden {
   display: none;
 }
 
-/* line 193, ../sass/main.scss */
+/* line 217, ../sass/main.scss */
 .current_song-title {
   display: inline-block;
   margin-top: 2px;
@@ -303,7 +310,7 @@ main {
   margin-right: 10px;
 }
 
-/* line 200, ../sass/main.scss */
+/* line 224, ../sass/main.scss */
 .current_song-time {
   display: inline-block;
   color: #666;
@@ -318,7 +325,7 @@ main {
   -webkit-flex-basis: auto;
 }
 
-/* line 208, ../sass/main.scss */
+/* line 232, ../sass/main.scss */
 .current_song-controls {
   float: right;
   position: relative;
@@ -326,7 +333,7 @@ main {
   right: 2px;
 }
 
-/* line 214, ../sass/main.scss */
+/* line 238, ../sass/main.scss */
 .btn {
   outline: none !important;
   background-color: #000;
@@ -347,17 +354,17 @@ main {
   height: 30px;
   border: none;
 }
-/* line 224, ../sass/main.scss */
+/* line 248, ../sass/main.scss */
 .btn:not(:last-child) {
   margin-right: 3px;
 }
-/* line 227, ../sass/main.scss */
+/* line 251, ../sass/main.scss */
 .btn i {
   font-size: 22px;
   color: #FF0044;
 }
 
-/* line 232, ../sass/main.scss */
+/* line 256, ../sass/main.scss */
 .logo {
   margin: 0 20px 8px 0;
   font-weight: 400;
@@ -367,24 +374,24 @@ main {
   display: inline-block;
   padding-bottom: 0px;
 }
-/* line 240, ../sass/main.scss */
+/* line 264, ../sass/main.scss */
 .logo span {
   vertical-align: middle;
 }
-/* line 241, ../sass/main.scss */
+/* line 265, ../sass/main.scss */
 .logo span:nth-child(1) {
   color: #ccc;
 }
-/* line 242, ../sass/main.scss */
+/* line 266, ../sass/main.scss */
 .logo span:nth-child(2) {
   color: #888;
 }
-/* line 243, ../sass/main.scss */
+/* line 267, ../sass/main.scss */
 .logo span:nth-child(3) {
   color: #FF0044;
 }
 
-/* line 245, ../sass/main.scss */
+/* line 269, ../sass/main.scss */
 html, body {
   font-family: 'Open Sans', sans-serif;
   background-color: #111;

@@ -35,14 +35,14 @@ $color: $red;
   0% { transform:rotate(0deg); }
   100% { transform:rotate(360deg); }
 }
-$bgColor: rgba(0,0,0,0.85);
+$bgColor: rgba(0,0,0,0.95);
 #color {
 	color: $color;
 }
 .play-list {
 	color: #aaa;
 	font-weight: 300;
-	background-color: $bgColor;
+	//background-color: $bgColor;
 	padding: 20px;
 	@include border-radius(10px);
 	&:not(:last-child) {
@@ -54,9 +54,10 @@ $bgColor: rgba(0,0,0,0.85);
 	}
 }
 .play-list-details {
-	@include flex( flex, flex-start, baseline, wrap );
+	//@include flex( flex, flex-start, baseline, wrap );
 }
-$marginBottom: 5px;
+$padding: 7px;
+$marginBottom: 7px;
 .play-list-title {
 	font-weight: 100;
 	text-align: left;
@@ -64,6 +65,12 @@ $marginBottom: 5px;
 	font-size: 1.3em;
 	line-height: 0.9em;
 	@include flex-size( 1, 0 );
+	background-color: $bgColor;
+	float:left;
+	display: inline-block;
+	padding: $padding*2;
+	border-top: 1px solid #333;
+	margin-right: 20px;
 }
 .play-list-artist {
 	text-align: left;
@@ -72,6 +79,11 @@ $marginBottom: 5px;
 	font-size: 0.875em;
 	letter-spacing: -0.02em;
 	margin-bottom: $marginBottom;
+	background-color: $bgColor;
+	float:left;
+	display: inline-block;
+	padding: $padding*2;
+	border-top: 1px solid #333;
 }
 .play-list-items {
 	margin: 0;
@@ -81,11 +93,21 @@ $marginBottom: 5px;
 	@include flex( flex, flex-start, baseline, wrap );
 	font-size: 1em;
 	list-style-type: none;
-	padding: 7px;
+	padding: $padding;
+	padding-right: $padding * 3;
 	text-align: left;
 	cursor: pointer;
+	background-color: $bgColor;
+	display:inline;
+	float:left;
+	border-top: 1px solid #333;
+	//border-bottom: 1px solid #333;
+	&::after {
+		clear: both;
+	}
+	
 	&:not(:last-child) {
-		border-bottom: 1px solid #333;
+		margin-bottom: $marginBottom;	
 	}
 	&:hover:not(.selected) {
 		color: #000;
@@ -96,6 +118,8 @@ $marginBottom: 5px;
 		color: $color;
 		.item-count { color: $color; }
 	}
+}
+.item-name {
 }
 .item-count {
 	font-weight: 500;

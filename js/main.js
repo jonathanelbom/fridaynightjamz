@@ -157,7 +157,7 @@
     }
 
 	function addPlaylist( data ) {
-		var listTemplate = '<section class="play-list col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1" id="'+data.id+'"><hgroup class="play-list-details">'
+		var listTemplate = '<section class="play-list col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1" id="'+data.id+'"><hgroup class="play-list-details clearfix">'
 			+'<h1 class="play-list-title">'+data.title+'</h1>'
             +'<span class="play-list-artist">'+data.participants+'</span>'
             +'</hgroup><ul class="play-list-items"></ul></section>';
@@ -172,7 +172,7 @@
         	var itemTemplate = '<li class="play-list-item" id="'+song.id+'">'
 	        	+'<span class="item-thumb"></span>'
 	        	+'<span class="item-count">'+(idx+1)+'</span>'
-	        	+'<span class="item-name">'+song.title+'<span></li>';
+	        	+'<span class="item-name">'+song.title+'</span></li><div style="clear:both"></div>';
 	        var $item = $( itemTemplate ).appendTo( $items );
 	        $item.find( '.item-thumb' ).css( 'background-image', 'url("'+'img/'+song.image+'")' );
         });
