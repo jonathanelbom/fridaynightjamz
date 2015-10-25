@@ -69,7 +69,7 @@ $marginBottom: 7px;
 	float:left;
 	display: inline-block;
 	padding: $padding*2;
-	border-top: 1px solid #333;
+	//border-top: 1px solid #333;
 	margin-right: 20px;
 }
 .play-list-artist {
@@ -83,25 +83,23 @@ $marginBottom: 7px;
 	float:left;
 	display: inline-block;
 	padding: $padding*2;
-	border-top: 1px solid #333;
+	//border-top: 1px solid #333;
 }
 .play-list-items {
 	margin: 0;
 	padding-left: 30px;
 }
 .play-list-item {
-	@include flex( flex, flex-start, baseline, wrap );
+	@include flex( inline-flex, flex-start, baseline, nowrap );
 	font-size: 1em;
 	list-style-type: none;
 	padding: $padding;
-	padding-right: $padding * 3;
+	padding-right: $padding * 2;
 	text-align: left;
 	cursor: pointer;
 	background-color: $bgColor;
-	display:inline;
 	float:left;
-	border-top: 1px solid #333;
-	//border-bottom: 1px solid #333;
+	//border-top: 1px solid #333;
 	&::after {
 		clear: both;
 	}
@@ -125,6 +123,7 @@ $marginBottom: 7px;
 	font-weight: 500;
 	color: #444;
 	margin-right: 10px;
+	flex-shrink:0;
 }
 .item-thumb {
 	margin-right: 10px;
@@ -135,6 +134,7 @@ $marginBottom: 7px;
 	background-image: url('/img/Naa Naa Wah Wah.jpg');
 	position:relative;
 	top: 3px;
+	flex-shrink:0;
 }
 #wavesurfer {
 	@include box-sizing(content-box);
