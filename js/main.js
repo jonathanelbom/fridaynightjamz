@@ -157,7 +157,8 @@
     }
 
 	function addPlaylist( data ) {
-		var listTemplate = '<section class="play-list col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1" id="'+data.id+'"><hgroup class="play-list-details clearfix">'
+		var cols = 'col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1'
+		var listTemplate = '<section class="play-list '+cols+'" id="'+data.id+'"><hgroup class="play-list-details clearfix">'
 			+'<h1 class="play-list-title">'+data.title+'</h1>'
             +'<span class="play-list-artist">'+data.participants+'</span>'
             +'</hgroup><ul class="play-list-items"></ul></section>';
