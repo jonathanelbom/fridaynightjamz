@@ -35,7 +35,7 @@ $color: $red;
   0% { transform:rotate(0deg); }
   100% { transform:rotate(360deg); }
 }
-$bgColor: rgba(0,0,0,0.95);
+$bgColor: rgba(0,0,0,0.85);
 #color {
 	color: $color;
 }
@@ -54,7 +54,7 @@ $bgColor: rgba(0,0,0,0.95);
 	}
 }
 
-$stickerBorder: 1px solid #333;
+$stickerBorder: 0px solid #333;
 $padding: 7px;
 $marginBottom: 7px;
 .play-list-details {
