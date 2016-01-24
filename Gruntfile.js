@@ -22,6 +22,17 @@ module.exports = function(grunt) {
 	        dest: 'dist/js/main.js'
 	      }
 	    },
+	    concat: {
+	    	options: {
+		      separator: ',',
+		      banner: 'var fnj = fnj || {}; fnj.playlists = _.sortBy( [',
+		      footer: '], function(o){ return o.date }).reverse();'
+		    },
+		    dist: {
+		      src: 'songs/*.js',
+		      dest: 'songs.js',
+		    }
+	    },
 	    copy: {
 		  main: {
 		    files: [
@@ -60,9 +71,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 
 	grunt.registerTask('default', []);
+	grunt.registerTask('build-songs', ['concat']);
 	grunt.registerTask('scss', ['watch']);
-	grunt.registerTask('dist', ['uglify', 'compass', 'copy']);
+	grunt.registerTask('dist', ['concat', 'uglify', 'compass', 'copy']);
 }
 
