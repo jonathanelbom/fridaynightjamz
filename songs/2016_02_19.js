@@ -1,6 +1,6 @@
 {
 	title: 'February 19, 2016',
-	participants: 'Andy, Jonathan, Jeff, Patt',
+	participants: 'Andy, Jonathan, Jeff, Pat',
 	date: '2016_02_19',
 	image: '',
 	songs:[
