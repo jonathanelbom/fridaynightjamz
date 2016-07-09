@@ -49,7 +49,8 @@
 		$loadProgress.outerWidth( '100%' ); //'0%' );
 		setTimeout( function() {
 			$ws.off('mouseup');
-			ws.load('audio/'+curSong.mp3, curSong.peaks);
+			var mp3_url = curSong.mp3.indexOf('http://') > -1 ? curSong.mp3 : 'audio/'+curSong.mp3
+			ws.load(mp3_url, curSong.peaks);
 			if ( isMobile ) {
 				$playMobile.show();
 			}
