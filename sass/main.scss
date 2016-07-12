@@ -125,6 +125,7 @@ $marginBottom: 7px;
 	}
 }
 .item-name {
+	text-transform: capitalize;
 }
 .item-count {
 	font-weight: 500;
@@ -227,6 +228,7 @@ $marginTop: 2px;
 	color: $color;
 	font-weight: 300;
 	margin-right: 10px;
+	text-transform: capitalize;
 }
 .current_song-time {
 	display:inline-block;

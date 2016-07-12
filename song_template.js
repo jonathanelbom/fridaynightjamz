@@ -1,9 +1,34 @@
 {
-	title: 'July 08, 2016',
-	participants: 'Alec, Andrew, Clay, Jonathan, Mike, Patrick',
-	date: '2016_07_08',
+	title: 'April 15, 2016',
+	participants: 'The Darkish Session',
+	date: '2016_04_15',
 	image: '',
 	songs:[
+		{
+			title: '',
+			mp3: '.mp3',
+			image: '.png',
+		},
+		{
+			title: '',
+			mp3: '.mp3',
+			image: '.png',
+		},
+		{
+			title: '',
+			mp3: '.mp3',
+			image: '.png',
+		},
+		{
+			title: '',
+			mp3: '.mp3',
+			image: '.png',
+		},
+		{
+			title: '',
+			mp3: '.mp3',
+			image: '.png',
+		},
 		{
 			title: '',
 			mp3: '.mp3',

@@ -43,13 +43,13 @@
 		curPlaylist = playlist;
 		$('.play-list-item').removeClass('selected');
 		$('.play-list-item#'+song.id).addClass('selected');
-		$('body, html').css('background-image', 'url("img/'+song.image+'")');
+		$('body, html').css('background-image', 'url("http://www.fridaynightjamz.com/img/'+song.image+'")');
 		$('.current_song-title').text( song.title );
 		$('.current_song-title-time').removeClass('hidden');
 		$loadProgress.outerWidth( '100%' ); //'0%' );
 		setTimeout( function() {
 			$ws.off('mouseup');
-			var mp3_url = curSong.mp3.indexOf('http://') > -1 ? curSong.mp3 : 'audio/'+curSong.mp3
+			var mp3_url = curSong.mp3.indexOf('http://') > -1 ? curSong.mp3 : 'http://www.fridaynightjamz.com/audio/'+curSong.mp3
 			ws.load(mp3_url, curSong.peaks);
 			if ( isMobile ) {
 				$playMobile.show();
@@ -176,7 +176,7 @@
 	        	+'<span class="item-count">'+(idx+1)+'</span>'
 	        	+'<span class="item-name">'+song.title+'</span></li><div style="clear:both"></div>';
 	        var $item = $( itemTemplate ).appendTo( $items );
-	        $item.find( '.item-thumb' ).css( 'background-image', 'url("'+'img/'+song.image+'")' );
+	        $item.find( '.item-thumb' ).css( 'background-image', 'url("'+'http://www.fridaynightjamz.com/img/'+song.image+'")' );
         });
 		$list.appendTo( $main );
 	}

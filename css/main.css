@@ -152,7 +152,12 @@
   color: #FF0044;
 }
 
-/* line 129, ../sass/main.scss */
+/* line 127, ../sass/main.scss */
+.item-name {
+  text-transform: capitalize;
+}
+
+/* line 130, ../sass/main.scss */
 .item-count {
   font-weight: 500;
   color: #444;
@@ -160,7 +165,7 @@
   flex-shrink: 0;
 }
 
-/* line 135, ../sass/main.scss */
+/* line 136, ../sass/main.scss */
 .item-thumb {
   margin-right: 10px;
   display: inline-block;
@@ -173,7 +178,7 @@
   flex-shrink: 0;
 }
 
-/* line 146, ../sass/main.scss */
+/* line 147, ../sass/main.scss */
 #wavesurfer {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -188,13 +193,13 @@
   position: relative;
 }
 
-/* line 154, ../sass/main.scss */
+/* line 155, ../sass/main.scss */
 wave {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 
-/* line 157, ../sass/main.scss */
+/* line 158, ../sass/main.scss */
 .play-mobile {
   position: absolute;
   z-index: 10;
@@ -208,7 +213,7 @@ wave {
   -webkit-align-items: center;
   cursor: pointer;
 }
-/* line 164, ../sass/main.scss */
+/* line 165, ../sass/main.scss */
 .play-mobile .play-icon {
   height: 60px;
   width: 60px;
@@ -227,7 +232,7 @@ wave {
   font-size: 25px;
 }
 
-/* line 175, ../sass/main.scss */
+/* line 176, ../sass/main.scss */
 main {
   padding: 100px 20px 40px 20px;
   text-align: center;
@@ -240,22 +245,22 @@ main {
   transition: padding-top 0.5s ease;
 }
 
-/* line 182, ../sass/main.scss */
+/* line 183, ../sass/main.scss */
 .control-nav {
   background-color: #000;
 }
 
-/* line 185, ../sass/main.scss */
+/* line 186, ../sass/main.scss */
 .sub-nav {
   background-color: #222;
   position: relative;
 }
-/* line 187, ../sass/main.scss */
+/* line 188, ../sass/main.scss */
 .sub-nav.hidden {
   height: 0;
 }
 
-/* line 192, ../sass/main.scss */
+/* line 193, ../sass/main.scss */
 .loadProgress {
   width: 0%;
   padding: 0;
@@ -266,21 +271,21 @@ main {
   top: -1px;
 }
 
-/* line 201, ../sass/main.scss */
+/* line 202, ../sass/main.scss */
 .navbar-header {
   width: 100%;
   padding: 8px 0 10px 0;
   position: relative;
 }
 
-/* line 206, ../sass/main.scss */
+/* line 207, ../sass/main.scss */
 .navbar-fixed-top {
   -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
   border-bottom: 1px solid #FF0044;
 }
 
-/* line 211, ../sass/main.scss */
+/* line 212, ../sass/main.scss */
 .current_song {
   font-size: 1em;
   color: #999;
@@ -288,26 +293,27 @@ main {
   display: -webkit-flex;
 }
 
-/* line 216, ../sass/main.scss */
+/* line 217, ../sass/main.scss */
 .current_song-title-time {
   display: inline-block;
   margin-right: 20px;
 }
-/* line 219, ../sass/main.scss */
+/* line 220, ../sass/main.scss */
 .current_song-title-time .hidden {
   display: none;
 }
 
-/* line 224, ../sass/main.scss */
+/* line 225, ../sass/main.scss */
 .current_song-title {
   display: inline-block;
   margin-top: 2px;
   color: #FF0044;
   font-weight: 300;
   margin-right: 10px;
+  text-transform: capitalize;
 }
 
-/* line 231, ../sass/main.scss */
+/* line 233, ../sass/main.scss */
 .current_song-time {
   display: inline-block;
   color: #666;
@@ -322,7 +328,7 @@ main {
   -webkit-flex-basis: auto;
 }
 
-/* line 239, ../sass/main.scss */
+/* line 241, ../sass/main.scss */
 .current_song-controls {
   float: right;
   position: relative;
@@ -330,7 +336,7 @@ main {
   right: 2px;
 }
 
-/* line 245, ../sass/main.scss */
+/* line 247, ../sass/main.scss */
 .btn {
   outline: none !important;
   background-color: #000;
@@ -351,17 +357,17 @@ main {
   height: 30px;
   border: none;
 }
-/* line 255, ../sass/main.scss */
+/* line 257, ../sass/main.scss */
 .btn:not(:last-child) {
   margin-right: 3px;
 }
-/* line 258, ../sass/main.scss */
+/* line 260, ../sass/main.scss */
 .btn i {
   font-size: 22px;
   color: #FF0044;
 }
 
-/* line 263, ../sass/main.scss */
+/* line 265, ../sass/main.scss */
 .logo {
   margin: 0 20px 8px 0;
   font-weight: 400;
@@ -371,24 +377,24 @@ main {
   display: inline-block;
   padding-bottom: 0px;
 }
-/* line 271, ../sass/main.scss */
+/* line 273, ../sass/main.scss */
 .logo span {
   vertical-align: middle;
 }
-/* line 272, ../sass/main.scss */
+/* line 274, ../sass/main.scss */
 .logo span:nth-child(1) {
   color: #ccc;
 }
-/* line 273, ../sass/main.scss */
+/* line 275, ../sass/main.scss */
 .logo span:nth-child(2) {
   color: #888;
 }
-/* line 274, ../sass/main.scss */
+/* line 276, ../sass/main.scss */
 .logo span:nth-child(3) {
   color: #FF0044;
 }
 
-/* line 276, ../sass/main.scss */
+/* line 278, ../sass/main.scss */
 html, body {
   font-family: 'Open Sans', sans-serif;
   background-color: #111;
